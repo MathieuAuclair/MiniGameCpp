@@ -48,7 +48,8 @@ void Game::handleEvents(){
 }
 
 void Game::update(){
-
+	count++;
+	std::cout<<count<<std::endl;
 }
 
 void Game::render(){
