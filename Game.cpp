@@ -2,7 +2,7 @@
 
 //texture holder
 SDL_Texture* characterTexture;
-
+SDL_Rect  sourceRect, destinationRect;
 
 Game::Game(){
 
@@ -41,6 +41,8 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	SDL_Surface* tmpSurface = IMG_Load("./character1.png");
 	characterTexture = SDL_CreateTextureFromSurface(renderer, tmpSurface);	
 	SDL_FreeSurface(tmpSurface);
+	destinationRect.h = 64;
+	destinationRect.w = 64;
 
 }
 
@@ -58,13 +60,13 @@ void Game::handleEvents(){
 
 void Game::update(){
 	count++;
-	std::cout<<count<<std::endl;
+
 }
 
 void Game::render(){
 	SDL_RenderClear(renderer);
 	//stuff to render here!
-	SDL_RenderCopy(renderer, characterTexture, NULL, NULL);
+	SDL_RenderCopy(renderer, characterTexture, NULL, &destinationRect);
 
 	SDL_RenderPresent(renderer);
 }
