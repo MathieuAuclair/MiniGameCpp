@@ -1,5 +1,9 @@
 #include "Game.h"
 
+//texture holder
+SDL_Texture* characterTexture;
+
+
 Game::Game(){
 
 }
@@ -30,9 +34,14 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 		}
 
 		isRunning = true;
-	} else{
-		isRunning = false;	
+
 	}
+
+	//process to include texture
+	SDL_Surface* tmpSurface = IMG_Load("./character1.png");
+	characterTexture = SDL_CreateTextureFromSurface(renderer, tmpSurface);	
+	SDL_FreeSurface(tmpSurface);
+
 }
 
 void Game::handleEvents(){
@@ -55,6 +64,8 @@ void Game::update(){
 void Game::render(){
 	SDL_RenderClear(renderer);
 	//stuff to render here!
+	SDL_RenderCopy(renderer, characterTexture, NULL, NULL);
+
 	SDL_RenderPresent(renderer);
 }
 
